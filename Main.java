@@ -46,7 +46,8 @@ public class Main {
 
                 case 1:
                     System.out.print("Enter content to add: ");
-                    System.out.println(s + addContent(sc));
+                    s = addContent(s,sc);
+                    System.out.println(s);
                     break;
 
                 case 2:
@@ -71,7 +72,7 @@ public class Main {
                     break;
 
                 case 6:
-                    prefixAndSuffix(s, sc);
+                   prefixAndSuffix(s, sc);
                     break;
 
                 case 7:
@@ -87,77 +88,79 @@ public class Main {
         } while (option != 7); // exit if user enters 7
     }
 
-        static String addContent (Scanner sc){
-            return sc.nextLine();
+    static String addContent (String s, Scanner sc) {
+        String add = sc.nextLine();
+        return s + add;
+    }
+    static boolean stringContains (String s, Scanner sc) {
+        String v = sc.nextLine();
+        return s.contains(v); // tests if 's' contains 'v'; returns true if so
+    }
 
+    static int stringLength (String s) {
+        return s.length(); // finds length of String 's'
+    }
 
+    static String afterPrefix (String s, Scanner sc) {
+
+        System.out.print("Enter the prefix: ");
+
+        // Prompt the user to enter the prefix
+        String prefix = sc.nextLine();
+        int prefixIndex = s.indexOf(prefix);
+
+        // indexOf() returns -1 if substring not found
+        // if  indexOf() finds substring prefix and prefixIndex + prefix.length is less than the length of 's'
+        // returns piece of string after prefix
+        if (prefixIndex != -1 && prefixIndex + prefix.length() < s.length()) {
+            return s.substring(prefixIndex + prefix.length());
+        } else {
+            return "Prefix not found or end of string";
         }
+    }
 
-        static boolean stringContains (String s, Scanner sc){
-            String v = sc.nextLine();
-            return s.contains(v); // tests if 's' contains 'v'; returns true if so
+    static String beforeSuffix (String s, Scanner sc) {
+
+        // Prompt the user to enter the suffix
+        System.out.print("Enter the suffix: ");
+        String suffix = sc.nextLine();
+
+        // Find the position of the last occurrence of the suffix in the string
+        int suffixIndex = s.lastIndexOf(suffix);
+
+        if (suffixIndex != -1) {
+            // If the suffix is found, returns the substring before the suffix
+            return s.substring(0, suffixIndex);
+        } else {
+            // If the suffix is not found, returns a message indicating it
+            return "Suffix not found.";
         }
+    }
 
-        static int stringLength (String s){
-            return s.length(); // finds length of String 's'
-        }
-        static String afterPrefix (String s, Scanner sc){
+    static void prefixAndSuffix (String s, Scanner sc) {
 
-            System.out.print("Enter the prefix: ");
+        System.out.print("Enter prefix: ");
+        String prefix = sc.nextLine();
 
-            // Prompt the user to enter the prefix
-            String prefix = sc.nextLine();
-            int prefixIndex = s.indexOf(prefix);
+        System.out.print("Enter suffix: ");
+        String suffix =  sc.nextLine();
 
-            // indexOf() returns -1 if substring not found
-            // if  indexOf() finds substring prefix and prefixIndex + prefix.length is less than the length of 's'
-            // returns piece of string after prefix
-            if (prefixIndex != -1 && prefixIndex + prefix.length() < s.length()) {
-                return s.substring(prefixIndex + prefix.length());
-            } else {
-                return "Prefix not found or end of string";
-            }
-        }
-        static String beforeSuffix (String s, Scanner sc){
-
-            // Prompt the user to enter the suffix
-            System.out.print("Enter the suffix: ");
-            String suffix = sc.nextLine();
-
-            // Find the position of the last occurrence of the suffix in the string
-            int suffixIndex = s.lastIndexOf(suffix);
-
-            if (suffixIndex != -1) {
-                // If the suffix is found, returns the substring before the suffix
-                return s.substring(0, suffixIndex);
-            } else {
-                // If the suffix is not found, returns a message indicating it
-                return "Suffix not found.";
-            }
-        }
-        static void prefixAndSuffix (String s, Scanner sc){
-
-            System.out.print("Enter substring: ");
-            String word = sc.nextLine();
-
-            int wordIndex = s.indexOf(word);
-
-//  if wordIndex finds input assign before s.substring index values (0, until wordIndex)
-//  if wordIndex finds input assign after the proceeding index values until the end of the String
-            if (wordIndex != -1) {
-                String before = s.substring(0, wordIndex);
-                String after = s.substring(wordIndex + word.length());
-
-                System.out.println("Substring before: " + before);
-                System.out.println("Substring after: " + after);
-            } else {
-                System.out.println("Substring not found.");
-            }
+        int prefixIndex = s.indexOf(prefix);
+        int suffixIndex = s.lastIndexOf(suffix);
 
 
+        if (prefixIndex != -1 && suffixIndex != -1 && prefixIndex < suffixIndex) {
+            String between = s.substring(prefixIndex + prefix.length(), suffixIndex);
+            System.out.println("Output: " + between);
+
+        } else {
+            System.out.println("Substring not found.");
         }
 
 
     }
+
+
+}
 
 
