@@ -115,7 +115,7 @@ public class Main {
         if (prefixIndex != -1 && prefixIndex + prefix.length() < s.length()) {
             return s.substring(prefixIndex + prefix.length());
         } else {
-            return "Prefix not found or end of string";
+            return "Prefix not found or end of string!";
         }
     }
 
@@ -133,7 +133,7 @@ public class Main {
             return s.substring(0, suffixIndex);
         } else {
             // If the suffix is not found, returns a message indicating it
-            return "Suffix not found.";
+            return "Suffix not found!";
         }
     }
 
@@ -146,8 +146,7 @@ public class Main {
         String suffix =  sc.nextLine();
 
         int prefixIndex = s.indexOf(prefix);
-        int suffixIndex = s.lastIndexOf(suffix);
-
+        int suffixIndex = s.indexOf(suffix);
 
         if (prefixIndex != -1 && suffixIndex != -1 && prefixIndex < suffixIndex) {
             String between = s.substring(prefixIndex + prefix.length(), suffixIndex);
